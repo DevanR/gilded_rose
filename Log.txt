@@ -117,3 +117,9 @@ I noticed that the test names are not showing the Item names. Will update and re
 
 Now, I'm goign to try and extract logic for "Sulfuras". Ok, ran into a slight issue because of an inverse
 condition. Patched it by adding logic to "Sulfuras". Not quite happy with that, but I'm moving on for now.
+
+Now comes the big one...with "Backstage passes". Probably will have to do it into two phases...quality and sell_in.
+Let's go!
+
+Ok, I've extracted logic for "Backstage passes" but the remaing logic is messy and hard to read. I would like to
+coalesce the remaining log into a regular item function call of some sort. Did some tidying of the remaining item logic.
