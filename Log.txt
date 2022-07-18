@@ -125,3 +125,10 @@ Ok, I've extracted logic for "Backstage passes" but the remaing logic is messy a
 coalesce the remaining log into a regular item function call of some sort. Did some tidying of the remaining item logic.
 
 Now I think we can add the logic of "Conjured" items. Turn on red tests. Get to Green.
+
+Now to refactor....A closer inspection of the code...certain things become apparent to me:
+
+- the update_quality() is getting big
+- each logical branch within the update_quality() can be its very own function
+
+Lets try that.
