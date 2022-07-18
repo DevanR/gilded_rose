@@ -139,3 +139,8 @@ of OO into the mix. But I dont want to break the fixtures file. Lets see if ther
 I also notice some duplication with the functions with regards to sell_in but I'm comfortable leaving that in for now.
 What I'm worried is if in the future we need to add additional log based on other factor apart from name...what if
 we need logic that applies on sell_in? What if we need to create some logic for a Promotion?
+
+==================================================================================
+New Requirement: I would like to apply a Promotion across all items in shop.
+On the last day of the sell_in period, the item returns to its original price.
+==================================================================================
