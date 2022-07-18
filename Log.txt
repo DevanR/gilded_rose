@@ -111,4 +111,6 @@ And make sure we're all green before we start refactoring.
 
 Extracted logic for "Aged Brie" successfully, all test pass.
 
-Removing duplicate code for "Aged Brie".
+Removing duplicate code for "Aged Brie".a
+
+I noticed that the test names are not showing the Item names. Will update and reorganise them.
