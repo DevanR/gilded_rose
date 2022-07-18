@@ -1,0 +1,111 @@
+17/07/2022
+
+[1]
+First impression is that there are some similarities to LastYard.
+Different Items(Articles) and there are different rules on how they
+should be treated.
+
+Another similar point is that the logic is tightly coupled. Any changes
+can very easily affect the logic applied to other Items.
+
+Next steps to take is to create a suite of Unit tests as a safety net before
+I can do any refactoring.
+
+There are a number of requirements, but they seem almost to conflict with each
+other. My strategy is to look for the simplest, smallest step in the right direction
+and do that.
+
+18/07/2022
+
+[1]
+
+Let's define the rules.
+
+1. I will call the shot before I take it.
+2. Show all my mistakes.
+
+Ok, here we go. There's a lot to process. But I think the first step is to get
+a simple test passing. Maybe pick the requirement that is the simplest.
+
+Ok, I'll start with the Value decreases every day. I know its going to fail for
+some items but I have to start somewhere.
+
+Ok, test_value_decreases() is passing. Had a quick look at the requirements and I
+noticed that Items are distinguished by their "name". The names are used to check
+for and apply different rules.
+
+Ok...so lets make a list of different Items being tested:
+
+"Aged Brie"
+"Backstage passes to a TAFKAL80ETC concert"
+"Sulfuras, Hand of Ragnaros"
+
+Ok, so we are currently supporting 3 items with unique logic and we want to add a fourth:
+"Conjured".
+
+There are also, Item wide rules:
+
+	- At the end of each day our system lowers both values for every item
+	- Once the sell by date has passed, Quality degrades twice as fast
+	- The Quality of an item is never negative
+	- The Quality of an item is never more than 50
+
+Let's organise the requirements by Item
+
+"Aged Brie"
+	- "Aged Brie" actually increases in Quality the older it gets
+
+"Sulfuras"
+	- "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
+
+"Backstage passes"
+	- "Backstage passes", like aged brie, increases in Quality as its SellIn value approaches;
+	Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but
+	Quality drops to 0 after the concert
+
+"Conjured"
+	- degrade in Quality twice as fast as normal items
+
+My plan...let me write the tests for the system wide rules. I know that they will fail for the unique items.
+But thats ok for now. I want to cast my net as far as possible and leave the edge cases for later.
+So the 3 additional tests will be:
+
+    - test_quality_is_never_negative
+    - test_quality_does_not_exceed_fifty
+    - test_quality_degrades_twice_past_sell_in_date
+
+The third test applies to uniues items, so I'm going to skip them for now.
+
+Start on third test using "Aged Brie", not as straight forward as I'd like and it rate of Quality changes over
+time. Don't really want to write a test over 10 days, but lets give it a go.
+
+Misunderstood requirements.."Aged Brie" does not have a variable rate. Tests are easier than expected. Follow the
+implementation results.
+
+Moving on to "Sulfuras". Don't understand the requirements. Will let the current implementation guide the tests. Will
+write tests and use results to write asserts.
+
+After running implementation and fixtures...."Sulfuras" sell_in date does not change and neither does its quality.
+Updating tests. Made a mistake with "Sulfuras"...the item name needs to be specific "Sulfuras, Hand of Ragnaros".
+
+Last test...fr "Backstage passes". Need 4 tests:
+    - test_quality_increases_twice_ten_to_six
+    - test_quality_increases_thrice_five_to_1
+    - test_quality_zeros_at_sell_in
+    - test_quality_stays_zero_past_sell_in
+
+And now to add test for "Conjured" items. We have a safety net in place. Write a test for:
+	- "Conjured" items degrade in Quality twice as fast as normal items
+
+Hurray! We have our first red test.
+
+Decision time...do I implement the feature or Refactor??!!!
+
+I choose to refactor...My initial thought is that there is the common logic and then there is the Item specific
+logic. So can we try to separate them? It seems that it would be easier to pull the Item specific logic out and
+duplicate it. Let's try that for "Aged Brie". I'll put a check at the very top and duplicate the code.
+Note that this is the first time, that I'll be touching the production code.
+
+Before I start, I notice that I still have my red test. Let's comment it out. Do a git commit on the tests that we have.
+And make sure we're all green before we start refactoring.
+
