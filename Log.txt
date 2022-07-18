@@ -109,3 +109,6 @@ Note that this is the first time, that I'll be touching the production code.
 Before I start, I notice that I still have my red test. Let's comment it out. Do a git commit on the tests that we have.
 And make sure we're all green before we start refactoring.
 
+Extracted logic for "Aged Brie" successfully, all test pass.
+
+Removing duplicate code for "Aged Brie".
