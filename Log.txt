@@ -132,3 +132,10 @@ Now to refactor....A closer inspection of the code...certain things become appar
 - each logical branch within the update_quality() can be its very own function
 
 Lets try that.
+
+At this point I'm thinking it would be nice to subclass Item and just call update_quality() for each Item. Throw abit
+of OO into the mix. But I dont want to break the fixtures file. Lets see if there is anything else we can do.
+
+I also notice some duplication with the functions with regards to sell_in but I'm comfortable leaving that in for now.
+What I'm worried is if in the future we need to add additional log based on other factor apart from name...what if
+we need logic that applies on sell_in? What if we need to create some logic for a Promotion?
