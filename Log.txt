@@ -123,3 +123,5 @@ Let's go!
 
 Ok, I've extracted logic for "Backstage passes" but the remaing logic is messy and hard to read. I would like to
 coalesce the remaining log into a regular item function call of some sort. Did some tidying of the remaining item logic.
+
+Now I think we can add the logic of "Conjured" items. Turn on red tests. Get to Green.

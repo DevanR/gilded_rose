@@ -22,6 +22,11 @@ class GildedRose(object):
                         item.quality = item.quality + 1
                 if item.sell_in <= 0:
                     item.quality = 0
+            elif item.name == "Conjured Mana Cake":
+                if item.quality > 2:
+                    item.quality = item.quality - 2
+                elif item.quality == 1:
+                    item.quality = item.quality - 1
             else:
                 if item.quality > 0:
                     item.quality = item.quality - 1

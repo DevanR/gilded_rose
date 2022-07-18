@@ -96,21 +96,21 @@ class GildedRoseTest(unittest.TestCase):
         gilded_rose.update_quality()
         self.assertEqual(0, items[0].quality)
 
-#    def test_conjured_quality_degrades_twice(self):
-#        items = [Item("Conjured Mana Cake", 5, 5)]
-#        gilded_rose = GildedRose(items)
-#        gilded_rose.update_quality()
-#        self.assertEqual(3, items[0].quality)
-#        self.assertEqual(3, items[0].sell_in)
-#        gilded_rose.update_quality()
-#        self.assertEqual(1, items[0].quality)
-#        self.assertEqual(2, items[0].sell_in)
-#        gilded_rose.update_quality()
-#        self.assertEqual(0, items[0].quality)
-#        self.assertEqual(0, items[0].sell_in)
-#        gilded_rose.update_quality()
-#        self.assertEqual(0, items[0].quality)
-#        self.assertEqual(-1, items[0].sell_in)
+    def test_conjured_quality_degrades_twice(self):
+        items = [Item("Conjured Mana Cake", 5, 5)]
+        gilded_rose = GildedRose(items)
+        gilded_rose.update_quality()
+        self.assertEqual(3, items[0].quality)
+        self.assertEqual(4, items[0].sell_in)
+        gilded_rose.update_quality()
+        self.assertEqual(1, items[0].quality)
+        self.assertEqual(3, items[0].sell_in)
+        gilded_rose.update_quality()
+        self.assertEqual(0, items[0].quality)
+        self.assertEqual(2, items[0].sell_in)
+        gilded_rose.update_quality()
+        self.assertEqual(0, items[0].quality)
+        self.assertEqual(1, items[0].sell_in)
 
 
 
