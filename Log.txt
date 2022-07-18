@@ -1,5 +1,3 @@
-17/07/2022
-
 [1]
 First impression is that there are some similarities to LastYard.
 Different Items(Articles) and there are different rules on how they
@@ -15,9 +13,7 @@ There are a number of requirements, but they seem almost to conflict with each
 other. My strategy is to look for the simplest, smallest step in the right direction
 and do that.
 
-18/07/2022
-
-[1]
+[2]
 
 Let's define the rules.
 
@@ -27,10 +23,10 @@ Let's define the rules.
 Ok, here we go. There's a lot to process. But I think the first step is to get
 a simple test passing. Maybe pick the requirement that is the simplest.
 
-Ok, I'll start with the Value decreases every day. I know its going to fail for
-some items but I have to start somewhere.
+Ok, I'll start with the Value decreases every day. I know it's going to fail for
+some items, but I have to start somewhere.
 
-Ok, test_value_decreases() is passing. Had a quick look at the requirements and I
+Ok, test_value_decreases() is passing. Had a quick look at the requirements, and I
 noticed that Items are distinguished by their "name". The names are used to check
 for and apply different rules.
 
@@ -40,7 +36,7 @@ Ok...so lets make a list of different Items being tested:
 "Backstage passes to a TAFKAL80ETC concert"
 "Sulfuras, Hand of Ragnaros"
 
-Ok, so we are currently supporting 3 items with unique logic and we want to add a fourth:
+Ok, so we are currently supporting 3 items with unique logic, and we want to add a fourth:
 "Conjured".
 
 There are also, Item wide rules:
@@ -66,8 +62,8 @@ Let's organise the requirements by Item
 "Conjured"
 	- degrade in Quality twice as fast as normal items
 
-My plan...let me write the tests for the system wide rules. I know that they will fail for the unique items.
-But thats ok for now. I want to cast my net as far as possible and leave the edge cases for later.
+My plan...let me write the tests for the system-wide rules. I know that they will fail for the unique items.
+But that's ok for now. I want to cast my net as far as possible and leave the edge cases for later.
 So the 3 additional tests will be:
 
     - test_quality_is_never_negative
@@ -76,8 +72,8 @@ So the 3 additional tests will be:
 
 The third test applies to uniues items, so I'm going to skip them for now.
 
-Start on third test using "Aged Brie", not as straight forward as I'd like and it rate of Quality changes over
-time. Don't really want to write a test over 10 days, but lets give it a go.
+Started on third test using "Aged Brie", not as straight forward as I'd like as the rate of Quality changes over
+time. Don't really want to write a test over 10 days, but let's give it a go.
 
 Misunderstood requirements.."Aged Brie" does not have a variable rate. Tests are easier than expected. Follow the
 implementation results.
@@ -131,12 +127,12 @@ Now to refactor....A closer inspection of the code...certain things become appar
 - the update_quality() is getting big
 - each logical branch within the update_quality() can be its very own function
 
-Lets try that.
+Let's try that.
 
 At this point I'm thinking it would be nice to subclass Item and just call update_quality() for each Item. Throw abit
-of OO into the mix. But I dont want to break the fixtures file. Lets see if there is anything else we can do.
+of OO into the mix. But I don't want to break the fixtures file. Lets see if there is anything else we can do.
 
-I also notice some duplication with the functions with regards to sell_in but I'm comfortable leaving that in for now.
+I also notice some duplication with the functions with sell_in, but I'm comfortable leaving that in for now.
 What I'm worried is if in the future we need to add additional log based on other factor apart from name...what if
 we need logic that applies on sell_in? What if we need to create some logic for a Promotion?
 
