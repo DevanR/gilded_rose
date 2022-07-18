@@ -111,6 +111,9 @@ And make sure we're all green before we start refactoring.
 
 Extracted logic for "Aged Brie" successfully, all test pass.
 
-Removing duplicate code for "Aged Brie".a
+Removing duplicate code for "Aged Brie".
 
 I noticed that the test names are not showing the Item names. Will update and reorganise them.
+
+Now, I'm goign to try and extract logic for "Sulfuras". Ok, ran into a slight issue because of an inverse
+condition. Patched it by adding logic to "Sulfuras". Not quite happy with that, but I'm moving on for now.
