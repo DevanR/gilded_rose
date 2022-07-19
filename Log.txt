@@ -151,3 +151,6 @@ of an Item.
 
 I'm not sure where to go...so I think I'll start with a Test and see where that leads me. Storing Item Price seems
 easier. I'll start by writing a test to get the original price of an Item.
+
+Ok, so I have trivial passing test for get_original_price(). I'm not sure where to go from there, so moving on to the
+failing Promotion test.
