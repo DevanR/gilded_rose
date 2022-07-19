@@ -150,4 +150,4 @@ I need something that detects the last day across all Items. And I need a way to
 of an Item.
 
 I'm not sure where to go...so I think I'll start with a Test and see where that leads me. Storing Item Price seems
-easier. I'll start by writing a test to get the original price of a Item.
+easier. I'll start by writing a test to get the original price of an Item.
