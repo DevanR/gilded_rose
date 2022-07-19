@@ -58,6 +58,10 @@ class GildedRose(object):
     def __init__(self, items):
         self.items = items
 
+
+    def get_original_price(self, item):
+        return 5
+
     def update_quality(self):
 
         for item in self.items:
