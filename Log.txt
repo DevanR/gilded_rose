@@ -140,3 +140,14 @@ we need logic that applies on sell_in? What if we need to create some logic for 
 New Requirement: I would like to apply a Promotion across all items in shop.
 On the last day of the sell_in period, the item returns to its original price.
 ==================================================================================
+
+I'm feeling a little nervous...I don't really now where to begin. So far, the requirements have depended on the Item
+names. The new Promotion requirement would affect all Items in the store. And since the effects of the Promotion is
+Item specific, the outcome would also be different across Items. How do I apply an abstracted rule to all Items,
+individually?
+
+I need something that detects the last day across all Items. And I need a way to store the original Price
+of an Item.
+
+I'm not sure where to go...so I think I'll start with a Test and see where that leads me. Storing Item Price seems
+easier. I'll start by writing a test to get the original price of a Item.
