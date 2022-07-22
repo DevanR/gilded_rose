@@ -185,3 +185,6 @@ More refactoring. Not happy with the signature of regular(), as its taking extra
 Extracted post promo reset logic which pull in historic data.
 
 Extracted out the application of item function logic into a dict.
+
+In summary, I've tried my best to keep the Item algorithms away from the logic of its application as much as possible.
+I've also purposely not used any OOP techniques as I wanted to keep it as functional as possible.

@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from collections import defaultdict
-
 
 def aged_brie(item):
     if item.quality < 50:
