@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-def aged_brie(item, original_quality):
+def aged_brie(item):
     if item.quality < 50:
         item.quality = item.quality + 1
 
@@ -9,7 +9,7 @@ def aged_brie(item, original_quality):
         item.quality = item.quality - 1
 
 
-def sulfuras(item, original_quality):
+def sulfuras(item):
     item.sell_in = item.sell_in + 1
     item.sell_in = item.sell_in - 1
 
@@ -17,7 +17,7 @@ def sulfuras(item, original_quality):
         item.quality = item.quality - 1
 
 
-def backstage_pass(item, original_quality):
+def backstage_pass(item):
     item.quality = item.quality + 1
     if item.sell_in < 11:
         if item.quality < 50:
@@ -33,7 +33,7 @@ def backstage_pass(item, original_quality):
         item.quality = item.quality - 1
 
 
-def conjured(item, original_quality):
+def conjured(item):
     if item.quality > 2:
         item.quality = item.quality - 2
     elif item.quality == 1:
@@ -42,7 +42,6 @@ def conjured(item, original_quality):
     item.sell_in = item.sell_in - 1
     if item.sell_in < 0 and item.quality > 0:
         item.quality = item.quality - 1
-
 
 
 def regular(item, original_quality):
@@ -81,21 +80,21 @@ class GildedRose(object):
     def update_quality(self):
 
         for item_index, item in enumerate(self.items):
-            if item.name == "Aged Brie":
-                selected_function = aged_brie
-            elif item.name == "Sulfuras, Hand of Ragnaros":
-                selected_function = sulfuras
-            elif item.name == "Backstage passes to a TAFKAL80ETC concert":
-                selected_function = backstage_pass
-            elif item.name == "Conjured Mana Cake":
-                selected_function = conjured
-            else:
-                selected_function = regular
 
             self.last_qualities[item_index] = item.quality
-            selected_function(item, self.original_qualities[item_index])
-            self.apply_promotion(item, item_index)
 
+            if item.name == "Aged Brie":
+                aged_brie(item)
+            elif item.name == "Sulfuras, Hand of Ragnaros":
+                sulfuras(item)
+            elif item.name == "Backstage passes to a TAFKAL80ETC concert":
+                backstage_pass(item)
+            elif item.name == "Conjured Mana Cake":
+                conjured(item)
+            else:
+                regular(item, self.original_qualities[item_index])
+
+            self.apply_promotion(item, item_index)
 
 
 class Item:
