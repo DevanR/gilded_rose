@@ -10,10 +10,6 @@ def aged_brie(item, original_quality):
     if item.sell_in < 0 and item.quality > 0:
         item.quality = item.quality - 1
 
-    # New Promotion Requirement
-    if item.sell_in == 0:
-        item.quality = original_quality
-
     return last_quality
 
 
@@ -25,10 +21,6 @@ def sulfuras(item, original_quality):
 
     if item.sell_in < 0 and item.quality > 0:
         item.quality = item.quality - 1
-
-    # New Promotion Requirement
-    if item.sell_in == 0:
-        item.quality = original_quality
 
     return last_quality
 
@@ -50,10 +42,6 @@ def backstage_pass(item, original_quality):
     if item.sell_in < 0 and item.quality > 0:
         item.quality = item.quality - 1
 
-    # New Promotion Requirement
-    if item.sell_in == 0:
-        item.quality = original_quality
-
     return last_quality
 
 
@@ -68,10 +56,6 @@ def conjured(item, original_quality):
     item.sell_in = item.sell_in - 1
     if item.sell_in < 0 and item.quality > 0:
         item.quality = item.quality - 1
-
-    # New Promotion Requirement
-    if item.sell_in == 0:
-        item.quality = original_quality
 
     return last_quality
 
@@ -90,10 +74,6 @@ def regular(item, original_quality):
     if item.sell_in < 0 and item.quality > 0:
         item.quality = item.quality - 1
 
-    # New Promotion Requirement
-    if item.sell_in == 0:
-        item.quality = original_quality
-
     return last_quality
 
 
@@ -110,6 +90,10 @@ class GildedRose(object):
     def get_last_quality(self, item_index):
         return self.original_qualities[item_index]
 
+    def apply_promotion(self, item, item_index):
+        if item.sell_in == 0:
+            item.quality = self.get_original_quality(item_index)
+
     def update_quality(self):
 
         for item_index, item in enumerate(self.items):
@@ -125,6 +109,9 @@ class GildedRose(object):
                 selected_function = regular
 
             self.last_qualities[item_index] = selected_function(item, self.original_qualities[item_index])
+            self.apply_promotion(item, item_index)
+
+
 
 class Item:
     def __init__(self, name, sell_in, quality):
