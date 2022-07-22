@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from collections import defaultdict
+
 
 def aged_brie(item):
     if item.quality < 50:
@@ -53,6 +55,8 @@ def regular(item):
         item.quality = item.quality - 1
 
 
+def post_promo_reset(item, last_quality):
+    item.quality = last_quality
 
 
 class GildedRose(object):
@@ -61,6 +65,14 @@ class GildedRose(object):
         self.items = items
         self.original_qualities = [item.quality for item in self.items]
         self.last_qualities = [item.quality for item in self.items]
+
+        self.item_algos = {
+            "Aged Brie": aged_brie,
+            "Sulfuras, Hand of Ragnaros": sulfuras,
+            "Backstage passes to a TAFKAL80ETC concert": backstage_pass,
+            "Conjured Mana Cake": conjured,
+            "foo": regular
+        }
 
     def get_original_quality(self, item_index):
         return self.original_qualities[item_index]
@@ -78,9 +90,6 @@ class GildedRose(object):
         else:
             return False
 
-    def post_promo_reset(self, item, last_quality):
-        item.quality = last_quality
-
     def update_quality(self):
 
         for item_index, item in enumerate(self.items):
@@ -88,21 +97,11 @@ class GildedRose(object):
             self.last_qualities[item_index] = item.quality
 
             if self.was_on_promotion(item, item_index):
-                self.post_promo_reset(item, self.last_qualities[item_index])
+                post_promo_reset(item, self.last_qualities[item_index])
 
-            if item.name == "Aged Brie":
-                aged_brie(item)
-            elif item.name == "Sulfuras, Hand of Ragnaros":
-                sulfuras(item)
-            elif item.name == "Backstage passes to a TAFKAL80ETC concert":
-                backstage_pass(item)
-            elif item.name == "Conjured Mana Cake":
-                conjured(item)
-            else:
-                regular(item)
+            self.item_algos[item.name](item)
 
             self.apply_promotion(item, item_index)
-
 
 
 class Item:

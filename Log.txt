@@ -183,3 +183,5 @@ last state. It's working on preset values.
 More refactoring. Not happy with the signature of regular(), as its taking extra info.
 
 Extracted post promo reset logic which pull in historic data.
+
+Extracted out the application of item function logic into a dict.
