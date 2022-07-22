@@ -181,3 +181,5 @@ I've extracted out the updating of the last_quantity list, but I think the post_
 last state. It's working on preset values.
 
 More refactoring. Not happy with the signature of regular(), as its taking extra info.
+
+Extracted post promo reset logic which pull in historic data.

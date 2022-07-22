@@ -45,8 +45,6 @@ def conjured(item):
 
 
 def regular(item, original_quality):
-    post_promo_reset(item, original_quality)
-
     if item.quality > 0:
         item.quality = item.quality - 1
 
@@ -55,9 +53,6 @@ def regular(item, original_quality):
         item.quality = item.quality - 1
 
 
-def post_promo_reset(item, original_quality):
-    if item.sell_in == 0 and item.quality == original_quality:
-        item.quality = item.quality - 2
 
 
 class GildedRose(object):
@@ -77,11 +72,23 @@ class GildedRose(object):
         if item.sell_in == 0:
             item.quality = self.get_original_quality(item_index)
 
+    def was_on_promotion(self, item, item_index):
+        if item.sell_in == 0 and item.quality == self.original_qualities[item_index]:
+            return True
+        else:
+            return False
+
+    def post_promo_reset(self, item, last_quality):
+        item.quality = last_quality
+
     def update_quality(self):
 
         for item_index, item in enumerate(self.items):
 
             self.last_qualities[item_index] = item.quality
+
+            if self.was_on_promotion(item, item_index):
+                self.post_promo_reset(item, self.last_qualities[item_index])
 
             if item.name == "Aged Brie":
                 aged_brie(item)
@@ -95,6 +102,7 @@ class GildedRose(object):
                 regular(item, self.original_qualities[item_index])
 
             self.apply_promotion(item, item_index)
+
 
 
 class Item:

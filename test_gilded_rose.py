@@ -29,11 +29,9 @@ class GildedRoseTest(unittest.TestCase):
         gilded_rose.update_quality()
         self.assertEqual(9, items[0].quality)
         gilded_rose.update_quality()
-        # Pre Promotion test
-        #self.assertEqual(8, items[0].quality)
         self.assertEqual(10, items[0].quality)
         gilded_rose.update_quality()
-        self.assertEqual(6, items[0].quality)
+        self.assertEqual(8, items[0].quality)
 
     def test_aged_brie_quality_does_not_exceed_fifty(self):
         items = [Item("Aged Brie", 3, 48)]
@@ -43,8 +41,6 @@ class GildedRoseTest(unittest.TestCase):
         gilded_rose.update_quality()
         self.assertEqual(50, items[0].quality)
         gilded_rose.update_quality()
-        # Pre Promotion test
-        #self.assertEqual(50, items[0].quality)
         self.assertEqual(48, items[0].quality)
 
     def test_sulfuras_quality_does_not_vary(self):
@@ -83,8 +79,6 @@ class GildedRoseTest(unittest.TestCase):
         gilded_rose.update_quality()
         self.assertEqual(32, items[0].quality)
         gilded_rose.update_quality()
-        # Pre Promotion test
-        #self.assertEqual(35, items[0].quality)
         self.assertEqual(20, items[0].quality)
         gilded_rose.update_quality()
 
