@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
 def aged_brie(item, original_quality):
-    last_quality = item.quality
-
     if item.quality < 50:
         item.quality = item.quality + 1
 
@@ -10,24 +8,16 @@ def aged_brie(item, original_quality):
     if item.sell_in < 0 and item.quality > 0:
         item.quality = item.quality - 1
 
-    return last_quality
-
 
 def sulfuras(item, original_quality):
-    last_quality = item.quality
-
     item.sell_in = item.sell_in + 1
     item.sell_in = item.sell_in - 1
 
     if item.sell_in < 0 and item.quality > 0:
         item.quality = item.quality - 1
 
-    return last_quality
-
 
 def backstage_pass(item, original_quality):
-    last_quality = item.quality
-
     item.quality = item.quality + 1
     if item.sell_in < 11:
         if item.quality < 50:
@@ -42,12 +32,8 @@ def backstage_pass(item, original_quality):
     if item.sell_in < 0 and item.quality > 0:
         item.quality = item.quality - 1
 
-    return last_quality
-
 
 def conjured(item, original_quality):
-    last_quality = item.quality
-
     if item.quality > 2:
         item.quality = item.quality - 2
     elif item.quality == 1:
@@ -57,13 +43,10 @@ def conjured(item, original_quality):
     if item.sell_in < 0 and item.quality > 0:
         item.quality = item.quality - 1
 
-    return last_quality
 
 
 def regular(item, original_quality):
-    last_quality = item.quality
-
-    post_promo_reset(item, last_quality, original_quality)
+    post_promo_reset(item, original_quality)
 
     if item.quality > 0:
         item.quality = item.quality - 1
@@ -72,12 +55,10 @@ def regular(item, original_quality):
     if item.sell_in < 0 and item.quality > 0:
         item.quality = item.quality - 1
 
-    return last_quality
 
-
-def post_promo_reset(item, last_quality, original_quality):
+def post_promo_reset(item, original_quality):
     if item.sell_in == 0 and item.quality == original_quality:
-        item.quality = last_quality - 2
+        item.quality = item.quality - 2
 
 
 class GildedRose(object):
@@ -111,7 +92,8 @@ class GildedRose(object):
             else:
                 selected_function = regular
 
-            self.last_qualities[item_index] = selected_function(item, self.original_qualities[item_index])
+            self.last_qualities[item_index] = item.quality
+            selected_function(item, self.original_qualities[item_index])
             self.apply_promotion(item, item_index)
 
 

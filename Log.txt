@@ -176,3 +176,6 @@ In my haste, I created unnecessary arguments. These mistakes have been removed.a
 Extracted Promotion logic from individual item logic functions.
 
 I've extracted the post_promo_reset logic but I'm not happy where it is.
+
+I've extracted out the updating of the last_quantity list, but I think the post_promo_reset does not really reset to
+last state. It's working on preset values.
