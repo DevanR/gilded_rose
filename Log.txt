@@ -166,4 +166,7 @@ promotion state somewhere! Things are getting really complex fast. I'm already u
 qualities in the Gilded Rose object. Looks like the easiest way is to store the state of all items as well.
 Let do that and analyse again after.
 
-Got all tests passing. Looking at the code....this is how we get tangled code!
+Got all tests passing. Looking at the code....this is how we get tangled code!a
+
+How can we use the tests that we have to refactor. I would like a functional solution as opposed to creating a new Item
+class to save its state.
