@@ -63,9 +63,7 @@ def conjured(item, original_quality):
 def regular(item, original_quality):
     last_quality = item.quality
 
-    # Reset after Promotion
-    if item.sell_in == 0 and item.quality == original_quality:
-        item.quality = last_quality - 2
+    post_promo_reset(item, last_quality, original_quality)
 
     if item.quality > 0:
         item.quality = item.quality - 1
@@ -75,6 +73,11 @@ def regular(item, original_quality):
         item.quality = item.quality - 1
 
     return last_quality
+
+
+def post_promo_reset(item, last_quality, original_quality):
+    if item.sell_in == 0 and item.quality == original_quality:
+        item.quality = last_quality - 2
 
 
 class GildedRose(object):
