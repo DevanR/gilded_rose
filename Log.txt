@@ -170,3 +170,5 @@ Got all tests passing. Looking at the code....this is how we get tangled code!a
 
 How can we use the tests that we have to refactor. I would like a functional solution as opposed to creating a new Item
 class to save its state.
+
+In my haste, I created unnecessary arguments. These mistakes have been removed.

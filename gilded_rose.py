@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-def aged_brie(item, original_quality, last_quality):
+def aged_brie(item, original_quality):
     last_quality = item.quality
 
     if item.quality < 50:
@@ -17,7 +17,7 @@ def aged_brie(item, original_quality, last_quality):
     return last_quality
 
 
-def sulfuras(item, original_quality, last_quality):
+def sulfuras(item, original_quality):
     last_quality = item.quality
 
     item.sell_in = item.sell_in + 1
@@ -33,7 +33,7 @@ def sulfuras(item, original_quality, last_quality):
     return last_quality
 
 
-def backstage_pass(item, original_quality, last_quality):
+def backstage_pass(item, original_quality):
     last_quality = item.quality
 
     item.quality = item.quality + 1
@@ -57,7 +57,7 @@ def backstage_pass(item, original_quality, last_quality):
     return last_quality
 
 
-def conjured(item, original_quality, last_quality):
+def conjured(item, original_quality):
     last_quality = item.quality
 
     if item.quality > 2:
@@ -76,7 +76,7 @@ def conjured(item, original_quality, last_quality):
     return last_quality
 
 
-def regular(item, original_quality, last_quality):
+def regular(item, original_quality):
     last_quality = item.quality
 
     # Reset after Promotion
@@ -114,15 +114,15 @@ class GildedRose(object):
 
         for item_index, item in enumerate(self.items):
             if item.name == "Aged Brie":
-                self.last_qualities[item_index] = aged_brie(item, self.original_qualities[item_index], self.last_qualities[item_index])
+                self.last_qualities[item_index] = aged_brie(item, self.original_qualities[item_index])
             elif item.name == "Sulfuras, Hand of Ragnaros":
-                self.last_qualities[item_index] = sulfuras(item, self.original_qualities[item_index], self.last_qualities[item_index])
+                self.last_qualities[item_index] = sulfuras(item, self.original_qualities[item_index])
             elif item.name == "Backstage passes to a TAFKAL80ETC concert":
-                self.last_qualities[item_index] = backstage_pass(item, self.original_qualities[item_index], self.last_qualities[item_index])
+                self.last_qualities[item_index] = backstage_pass(item, self.original_qualities[item_index])
             elif item.name == "Conjured Mana Cake":
-                self.last_qualities[item_index] = conjured(item, self.original_qualities[item_index], self.last_qualities[item_index])
+                self.last_qualities[item_index] = conjured(item, self.original_qualities[item_index])
             else:
-                self.last_qualities[item_index] = regular(item, self.original_qualities[item_index], self.last_qualities[item_index])
+                self.last_qualities[item_index] = regular(item, self.original_qualities[item_index])
 
 
 class Item:
