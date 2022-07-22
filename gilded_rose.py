@@ -44,7 +44,7 @@ def conjured(item):
         item.quality = item.quality - 1
 
 
-def regular(item, original_quality):
+def regular(item):
     if item.quality > 0:
         item.quality = item.quality - 1
 
@@ -99,7 +99,7 @@ class GildedRose(object):
             elif item.name == "Conjured Mana Cake":
                 conjured(item)
             else:
-                regular(item, self.original_qualities[item_index])
+                regular(item)
 
             self.apply_promotion(item, item_index)
 
