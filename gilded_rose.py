@@ -114,16 +114,17 @@ class GildedRose(object):
 
         for item_index, item in enumerate(self.items):
             if item.name == "Aged Brie":
-                self.last_qualities[item_index] = aged_brie(item, self.original_qualities[item_index])
+                selected_function = aged_brie
             elif item.name == "Sulfuras, Hand of Ragnaros":
-                self.last_qualities[item_index] = sulfuras(item, self.original_qualities[item_index])
+                selected_function = sulfuras
             elif item.name == "Backstage passes to a TAFKAL80ETC concert":
-                self.last_qualities[item_index] = backstage_pass(item, self.original_qualities[item_index])
+                selected_function = backstage_pass
             elif item.name == "Conjured Mana Cake":
-                self.last_qualities[item_index] = conjured(item, self.original_qualities[item_index])
+                selected_function = conjured
             else:
-                self.last_qualities[item_index] = regular(item, self.original_qualities[item_index])
+                selected_function = regular
 
+            self.last_qualities[item_index] = selected_function(item, self.original_qualities[item_index])
 
 class Item:
     def __init__(self, name, sell_in, quality):
