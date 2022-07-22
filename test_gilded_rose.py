@@ -123,7 +123,7 @@ class GildedRoseTest(unittest.TestCase):
         gilded_rose.update_quality()
         gilded_rose.update_quality()
         gilded_rose.update_quality()
-        self.assertEqual(gilded_rose.get_original_price(0), 5)
+        self.assertEqual(gilded_rose.get_original_quality(0), 5)
 
     def test_promotion_price_on_last_day(self):
         items = [Item("foo", 3, 5)]
