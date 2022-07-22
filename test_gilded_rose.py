@@ -29,7 +29,9 @@ class GildedRoseTest(unittest.TestCase):
         gilded_rose.update_quality()
         self.assertEqual(9, items[0].quality)
         gilded_rose.update_quality()
-        self.assertEqual(8, items[0].quality)
+        # Pre Promotion test
+        #self.assertEqual(8, items[0].quality)
+        self.assertEqual(10, items[0].quality)
         gilded_rose.update_quality()
         self.assertEqual(6, items[0].quality)
 
@@ -41,7 +43,9 @@ class GildedRoseTest(unittest.TestCase):
         gilded_rose.update_quality()
         self.assertEqual(50, items[0].quality)
         gilded_rose.update_quality()
-        self.assertEqual(50, items[0].quality)
+        # Pre Promotion test
+        #self.assertEqual(50, items[0].quality)
+        self.assertEqual(48, items[0].quality)
 
     def test_sulfuras_quality_does_not_vary(self):
         items = [Item("Sulfuras, Hand of Ragnaros", 0, 2)]
@@ -79,7 +83,9 @@ class GildedRoseTest(unittest.TestCase):
         gilded_rose.update_quality()
         self.assertEqual(32, items[0].quality)
         gilded_rose.update_quality()
-        self.assertEqual(35, items[0].quality)
+        # Pre Promotion test
+        #self.assertEqual(35, items[0].quality)
+        self.assertEqual(20, items[0].quality)
         gilded_rose.update_quality()
 
     def test_backstage_quality_zeros_at_sell_in(self):
@@ -117,7 +123,16 @@ class GildedRoseTest(unittest.TestCase):
         gilded_rose.update_quality()
         gilded_rose.update_quality()
         gilded_rose.update_quality()
-        self.assertEqual(gilded_rose.get_original_price(items[0]), 5)
+        self.assertEqual(gilded_rose.get_original_price(0), 5)
+
+    def test_promotion_price_on_last_day(self):
+        items = [Item("foo", 3, 5)]
+        gilded_rose = GildedRose(items)
+        gilded_rose.update_quality()
+        gilded_rose.update_quality()
+        gilded_rose.update_quality()
+        self.assertEqual(0, items[0].sell_in)
+        self.assertEqual(5, items[0].quality)
 
 
 if __name__ == '__main__':

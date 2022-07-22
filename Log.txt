@@ -154,3 +154,16 @@ easier. I'll start by writing a test to get the original price of an Item.
 
 Ok, so I have trivial passing test for get_original_price(). I'm not sure where to go from there, so moving on to the
 failing Promotion test.
+
+I've added a list in Gilded Rose that stores the original qualities to be referenced later. While implementing the
+Promotion requirement, I noticed that because its logic reached across all items. The original tests are now failing.
+Hmm, I don't like this. Any future promotions will most likely break all tests again. Is there a better way? Will
+think about it as I get the tests to pass again.
+
+Ok, discovered another interesting aspect of the requirement. Do I reset the quality back to what it was before the
+Promotion or leave it as is? I think it should reset it back to what it was....but that means I have to store the pre
+promotion state somewhere! Things are getting really complex fast. I'm already uncomfortable with storing the original
+qualities in the Gilded Rose object. Looks like the easiest way is to store the state of all items as well.
+Let do that and analyse again after.
+
+
