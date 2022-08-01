@@ -190,3 +190,5 @@ In summary, I've tried my best to keep the Item algorithms away from the logic o
 I've also purposely not used any OOP techniques as I wanted to keep it as functional as possible.
 
 I'm trying to move towards a Strategy pattern, without breaking the tests as best as I can.
+
+Implemeted a formal interface. Still not happy with current promotion implementation.
