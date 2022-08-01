@@ -1,19 +1,21 @@
 # -*- coding: utf-8 -*-
 
+def apply_promotion(item):
+    if item.sell_in == 0:
+        item.quality = item.original_quality
+
+
+def was_on_promotion(item):
+    if item.sell_in == 0 and item.quality == item.original_quality:
+        return True
+    else:
+        return False
+
+
 class GildedRose(object):
 
     def __init__(self, items):
         self.items = items
-
-    def apply_promotion(self, item):
-        if item.sell_in == 0:
-            item.quality = item.original_quality
-
-    def was_on_promotion(self, item):
-        if item.sell_in == 0 and item.quality == item.original_quality:
-            return True
-        else:
-            return False
 
     def update_quality(self):
 
@@ -21,8 +23,8 @@ class GildedRose(object):
 
             item.update_quality(item)
 
-            if self.was_on_promotion(item):
+            if was_on_promotion(item):
                 item.quality = item.last_quality
 
-            self.apply_promotion(item)
+            apply_promotion(item)
 

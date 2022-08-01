@@ -194,3 +194,5 @@ I'm trying to move towards a Strategy pattern, without breaking the tests as bes
 Implemeted a formal interface. Still not happy with current promotion implementation.
 
 Integrated last_quality and original_quality back in Item class.
+
+Refactored out two promotional methods. Not sure if I should put them into the Updatable Class.
