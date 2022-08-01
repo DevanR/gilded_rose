@@ -94,14 +94,16 @@ class UpdatableItemInterface(metaclass=abc.ABCMeta):
     def last_quality(self, item: Item):
         raise NotImplementedError
 
+
 class UpdatableItem(Item, UpdatableItemInterface):
     def __init__(self, name, sell_in, quality):
         super().__init__(name, sell_in, quality)
         self._update_quality = ITEM_UPDATE_FUNCTIONS[self.name]
         self.original_quality = quality
-        self.last_quality =quality
+        self.last_quality = quality
 
     def update_quality(self, item: Item):
+        self.last_quality = self.quality
         self._update_quality(self)
 
     def original_quality(self, item: Item):

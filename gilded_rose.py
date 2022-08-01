@@ -19,12 +19,10 @@ class GildedRose(object):
 
         for item_index, item in enumerate(self.items):
 
-            item.last_quality = item.quality
+            item.update_quality(item)
 
             if self.was_on_promotion(item):
                 item.quality = item.last_quality
-
-            item.update_quality(item)
 
             self.apply_promotion(item)
 
