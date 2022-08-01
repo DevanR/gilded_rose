@@ -53,6 +53,15 @@ def regular(item):
         item.quality = item.quality - 1
 
 
+ITEM_UPDATE_FUNCTIONS = {
+    "Aged Brie": aged_brie,
+    "Sulfuras, Hand of Ragnaros": sulfuras,
+    "Backstage passes to a TAFKAL80ETC concert": backstage_pass,
+    "Conjured Mana Cake": conjured,
+    "foo": regular
+}
+
+
 def post_promo_reset(item, last_quality):
     item.quality = last_quality
 
@@ -63,14 +72,6 @@ class GildedRose(object):
         self.items = items
         self.original_qualities = [item.quality for item in self.items]
         self.last_qualities = [item.quality for item in self.items]
-
-        self.item_algos = {
-            "Aged Brie": aged_brie,
-            "Sulfuras, Hand of Ragnaros": sulfuras,
-            "Backstage passes to a TAFKAL80ETC concert": backstage_pass,
-            "Conjured Mana Cake": conjured,
-            "foo": regular
-        }
 
     def get_original_quality(self, item_index):
         return self.original_qualities[item_index]
@@ -97,7 +98,7 @@ class GildedRose(object):
             if self.was_on_promotion(item, item_index):
                 post_promo_reset(item, self.last_qualities[item_index])
 
-            self.item_algos[item.name](item)
+            item.update_quality(item)
 
             self.apply_promotion(item, item_index)
 
@@ -110,3 +111,9 @@ class Item:
 
     def __repr__(self):
         return "%s, %s, %s" % (self.name, self.sell_in, self.quality)
+
+
+class UpdatableItem(Item):
+    def __init__(self, name, sell_in, quality):
+        super().__init__(name, sell_in, quality)
+        self.update_quality = ITEM_UPDATE_FUNCTIONS[self.name]
